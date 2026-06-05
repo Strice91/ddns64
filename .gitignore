@@ -62,9 +62,6 @@ docs/_build/
 .pybuilder/
 target/
 
-# UV
-uv.lock
-
 # Environments
 .env
 .envrc
