@@ -18,7 +18,11 @@ def perform_update(limiter: RateLimiter, state: IPState) -> None:
         return
 
     # 2. Build API call params
-    params = {"key": settings.api.key, "domain": settings.api.domain, "output": "min"}
+    params = {
+        "key": settings.api.key[:6] + "*" * len(settings.api.key[6:]),
+        "domain": settings.api.domain,
+        "output": "min",
+    }
     if state.ipv4:
         params["ip"] = state.ipv4
     if state.ipv6:
