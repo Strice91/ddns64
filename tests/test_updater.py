@@ -23,7 +23,7 @@ def test_perform_update_success():
         mock_get.assert_called_once_with(
             settings.api.baseurl,
             params={
-                "key": settings.api.key,
+                "key": settings.api.key[:6] + "*" * len(settings.api.key[6:]),
                 "domain": settings.api.domain,
                 "output": "min",
                 "ip": "1.2.3.4",
