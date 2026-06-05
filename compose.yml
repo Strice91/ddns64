@@ -5,7 +5,7 @@ x-logging: &logging
 
 services:
   ddns:
-    #image: rstrice/ddns64:latest
+    image: rstrice/ddns64:latest
     build:
       context: .
       dockerfile: Containerfile
