@@ -54,7 +54,7 @@ settings = Dynaconf(
         ),
         Validator(
             "api.baseurl",
-            must_exist=True,
+            default="https://ipv64.net/nic/update",
             is_type_of=str,
             condition=_is_valid_url,
             messages={"condition": "api.baseurl must be a valid http(s) URL"},
@@ -99,7 +99,7 @@ settings = Dynaconf(
         ),
         Validator(
             "service.user_agent",
-            default="ddns-ipv64/0.0.1 (https://github.com/Strice91/ddns-ipv64)",
+            default="ddns64/0.1.1 (https://github.com/Strice91/ddns64)",
             is_type_of=str,
         ),
         # --- network -------------------------------------------------------
@@ -130,7 +130,7 @@ settings = Dynaconf(
         # --- logging -------------------------------------------------------
         Validator(
             "logging.level",
-            default="INFO",
+            default="WARNING",
             is_type_of=str,
             condition=lambda v: getattr(logging, v.upper(), None),
             messages={"condition": ("logging.level must be a valid logging level")},

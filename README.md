@@ -43,21 +43,48 @@ key = "your_actual_domain_key_here"
 
 Edit `config/settings.toml` to define your domain settings and service behavior:
 
+**API Settings (mandatory)**
+```toml
+[api]
+domain = "your-domain.ipv64.net" # Change to your actual domain
+```
+
+**API Settings (optional)**
+```toml
+[api]
+prefix = "" # Optional: set a prefix (subdomain) if needed, e.g., "ddns"
+```
+*Note: The `prefix` is optional and corresponds to the subdomain you have set up in ipv64.net. If you use multiple domains separated by commas, the same prefix applies to all.*
+
+**DynDNS Service Settings (optional)**
 ```toml
 [service]
 update_interval = 15
 max_updates = 5
 rate_limit_window = 60
-dry_run = false # Change to false to enable actual IP updates
+dry_run = false
 user_agent = "ddns-ipv64/0.0.1 (https://github.com/Strice91/ddns-ipv64)"
-
-[api]
-baseurl = "https://ipv64.net/nic/update"
-domain = "your-domain.ipv64.net" # Change to your actual domain
-prefix = "" # Set a prefix (subdomain) if needed, e.g., "ddns"
 ```
 
-*Note: The `prefix` is optional and corresponds to the subdomain you have set up in ipv64.net. If you use multiple domains separated by commas, the same prefix applies to all.*
+**Logging (optional)**
+```toml
+[logging]
+level = "DEBUG"
+```
+
+**Network (optional)**
+```toml
+[network]
+ipv4_sources = [
+    "https://ipinfo.io/ip",
+    ...
+]
+ipv6_sources = [
+    "https://ipv6.icanhazip.com",
+    ...
+]
+nameserver = "ns1.ipv64.net" # Select specific name server for DNS lookups
+```
 
 ### Settings Variables
 
@@ -66,15 +93,15 @@ Here is a complete list of the variables you can configure in `settings.toml`:
 | Section | Variable | Default | Description |
 | ------- | -------- | ------- | ----------- |
 | `[service]` | `update_interval` | `15` | Interval in minutes between IP checks. |
-| `[service]` | `max_updates` | `5` | Maximum number of updates allowed within the rate limit window. |
+| `[service]` | `max_updates` | `0` | Maximum number of updates allowed within the rate limit window. To disable set to 0. |
 | `[service]` | `rate_limit_window` | `60` | Time window in minutes for rate limiting (prevents abuse). |
-| `[service]` | `dry_run` | `true` | If true, simulates the API calls. Change to `false` to actually update records. |
+| `[service]` | `dry_run` | `false` | If true, simulates the API calls. Change to `false` to actually update records. |
 | `[service]` | `user_agent` | `"ddns-ipv64/0.0.1..."` | The HTTP User-Agent string sent during requests to the IPv64 API. |
 | `[api]` | `baseurl` | `"https://ipv64.net/nic/update"` | The IPv64 DDNS API endpoint. |
-| `[api]` | `domain` | `"deine-domain.ipv64.net"` | Your domain or domains (comma-separated) registered at IPv64. |
+| `[api]` | `domain` | `""` | Your domain or domains (comma-separated) registered at IPv64. |
 | `[api]` | `prefix` | `""` | Optional subdomain prefix (e.g., `ddns`). Applies to all domains. |
 | `[logging]` | `level` | `"DEBUG"` | Logging verbosity (`DEBUG`, `INFO`, `WARNING`, `ERROR`). |
-| `[network]` | `nameserver` | `"ns1.ipv64.net"` | The nameserver used to verify current DNS records for your domain. |
+| `[network]` | `nameserver` | `""` | The nameserver used to verify current DNS records for your domain. By default the local nameserver is used. |
 | `[network]` | `ipv4_sources` | `[list of URLs]` | Fallback list of services used to query your current public IPv4 address. |
 | `[network]` | `ipv6_sources` | `[list of URLs]` | Fallback list of services used to query your current public IPv6 address. |
 
