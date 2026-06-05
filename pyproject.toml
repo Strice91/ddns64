@@ -8,7 +8,7 @@ description = "DDNS Updater for IPv64.net"
 readme = "README.md"
 authors = [{ name = "Strice91", email = "r.strice@gmail.com" }]
 license = "GPL-3.0-or-later"
-version = "0.0.1"
+version = "0.1.0"
 requires-python = ">= 3.14"
 dependencies = [
     "dnspython>=2.8.0",
@@ -21,7 +21,7 @@ test = ["pytest"]
 lint = ["ruff"]
 
 [project.urls]
-Repository = "https://github.com/Strice91/ddns-ipv64"
+Repository = "https://github.com/Strice91/ddns64"
 
 [project.scripts]
 ddns64 = "ddns64.entrypoint:main"

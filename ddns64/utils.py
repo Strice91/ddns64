@@ -95,7 +95,7 @@ class IPState:
     ipv6: str | None = field(default=None)
 
     @classmethod
-    def detect(cls) -> "IPState":
+    def detect(cls) -> IPState:
         """Fetches the current public IPs based on the enabled address families."""
         ipv4 = None
         if settings.service.ipv4_enabled:
