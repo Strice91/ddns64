@@ -5,6 +5,9 @@ This project was completely ported to Python and is heavily inspired by [alcapon
 
 It periodically checks for IPv4 and IPv6 address changes and updates your A/AAAA records on ipv64.net.
 
+## Docker
+Image: https://hub.docker.com/r/rstrice/ddns64
+
 ## Prerequisites
 
 - [Docker](https://docs.docker.com/get-docker/)
