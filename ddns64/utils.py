@@ -1,3 +1,5 @@
+import copy
+import json
 import socket
 from dataclasses import dataclass, field
 from datetime import UTC, datetime, timedelta
@@ -9,6 +11,20 @@ from ddns64.config import settings
 from ddns64.log import get_logger
 
 logger = get_logger(__name__)
+
+
+def print_settings() -> None:
+    config_dict = copy.deepcopy(settings.as_dict())
+    for k, v in config_dict.items():
+        if k.upper() == "API" and isinstance(v, dict):
+            for sub_k in v.keys():
+                if sub_k.upper() == "KEY":
+                    key_val = str(v[sub_k])
+                    if len(key_val) > 6:
+                        v[sub_k] = key_val[:6] + "*" * (len(key_val) - 6)
+                    else:
+                        v[sub_k] = "***REDACTED***"
+    logger.info("Configuration: \n%s", json.dumps(config_dict, indent=2))
 
 
 def has_ipv6_connectivity() -> bool:

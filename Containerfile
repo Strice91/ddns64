@@ -7,4 +7,4 @@ COPY . .
 
 RUN uv sync --frozen --no-dev
 
-CMD ["uv", "run", "ddns64"]
+CMD ["uv", "run", "--no-sync", "ddns64"]

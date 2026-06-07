@@ -52,7 +52,7 @@ def update_loop() -> None:
     limiter = RateLimiter()
 
     while True:
-        logger.info(f"Starting DDNS update check for domain: {settings.api.domain}")
+        logger.info(f"Checking DDNS status for domain: {settings.api.domain}")
 
         state = IPState.detect()
 
