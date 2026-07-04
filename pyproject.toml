@@ -25,6 +25,7 @@ Repository = "https://github.com/Strice91/ddns64"
 
 [project.scripts]
 ddns64 = "ddns64.entrypoint:main"
+health = "ddns64.healthcheck:main"
 
 [tool.uv.build-backend]
 module-root = ""

@@ -7,4 +7,6 @@ COPY . .
 
 RUN uv sync --frozen --no-dev
 
-CMD ["uv", "run", "--no-sync", "ddns64"]
+ENV PATH="/app/.venv/bin:$PATH"
+
+CMD ["ddns64"]

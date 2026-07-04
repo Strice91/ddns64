@@ -17,3 +17,9 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - ./config/:/app/config/:ro
     logging: *logging
+    healthcheck:
+      test: ["CMD", "health"]
+      interval: 5m
+      timeout: 10s
+      retries: 3
+      start_period: 1m
