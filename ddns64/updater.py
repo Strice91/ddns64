@@ -19,7 +19,7 @@ def perform_update(limiter: RateLimiter, state: IPState) -> None:
 
     # 2. Build API call params
     params = {
-        "key": settings.api.key[:6] + "*" * len(settings.api.key[6:]),
+        "key": settings.api.key,
         "domain": settings.api.domain,
         "output": "min",
     }
@@ -33,6 +33,8 @@ def perform_update(limiter: RateLimiter, state: IPState) -> None:
     # 3. Execute API call
     try:
         if settings.service.dry_run:
+            # Mask API key
+            params["key"] = params["key"][:6] + "*" * len(params["key"][6:])
             logger.info(f"Dry-run: Would update to {params}")
             limiter.record_update()
             return
